@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: sales
+    description: "Raw data"
+    database: sales
+    tables:
+      - name: sales
+        description: "Raw sales data"
