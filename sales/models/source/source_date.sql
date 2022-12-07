@@ -2,7 +2,7 @@
 
 with cte as (
     select 
-        date date,
+        date(date) date,
         year(date) year,
         monthname(date) month,
         day(date) day,

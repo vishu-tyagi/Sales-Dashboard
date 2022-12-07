@@ -6,6 +6,8 @@ with ranked as (
         Product name,
         Category category,
         Segment segment,
+        ManufacturerID manufacturerid,
+        Manufacturer manufacturer,
         `Unit Cost` unit_cost,
         `Unit Price` unit_price,
         rank() over (

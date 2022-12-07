@@ -6,4 +6,6 @@ sources:
     database: sales
     tables:
       - name: sales
-        description: "Raw sales data"
+        description: "Fact sales"
+      - name: budget
+        description: "Fact budget"

@@ -2,24 +2,19 @@
 
 with ranked as (
     select 
-        ZipCode zipcode,
-        City city, 
-        State state, 
-        Region region,
-        District district,
-        Country country,
+        Category category,
+        Segment segment,
         rank() over (
-            partition by ZipCode, City, State, Region, District, Country
-            order by date desc
+            partition by Category, Segment
         ) rnk
     from {{source("sales", "sales")}}
 )
 
 , deduplicated as (
-    select zipcode, city, state, region, district, country
+    select category, segment
     from ranked 
     where rnk = 1
-    order by zipcode
+    order by category, segment
 )
 
 , final as (
