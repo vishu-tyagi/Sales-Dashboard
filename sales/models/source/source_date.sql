@@ -1,7 +1,5 @@
-{{ config(materialized="table") }}
-
 with cte as (
-    select 
+    select
         date(date) date,
         year(date) year,
         monthname(date) month,

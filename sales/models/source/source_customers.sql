@@ -1,11 +1,9 @@
-{{ config(materialized="table") }}
-
-with ranked as (
+with numbered as (
     select 
         CustomerID id,
         `Email Name` email,
         ZipCode zipcode,
-        rank() over (partition by CustomerID order by date desc) rnk
+        row_number() over (partition by CustomerID order by date desc) rn
     from {{source("sales", "sales")}}
 )
 
@@ -16,8 +14,8 @@ with ranked as (
         substring_index(substring_index(email, ": ", -1), ",", 1) first_name,
         substring_index(substring_index(email, ":", -1), ", ", -1) second_name,
         zipcode
-    from ranked
-    where rnk = 1
+    from numbered
+    where rn = 1
     order by id
 )
 

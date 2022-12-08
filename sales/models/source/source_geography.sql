@@ -1,20 +1,23 @@
-{{ config(materialized="table") }}
-
-with ranked as (
+with numbered as (
     select 
-        Category category,
-        Segment segment,
-        rank() over (
-            partition by Category, Segment
-        ) rnk
+        ZipCode zipcode,
+        City city, 
+        State state, 
+        Region region,
+        District district,
+        Country country,
+        row_number() over (
+            partition by ZipCode, City, State, Region, District, Country
+            order by date desc
+        ) rn
     from {{source("sales", "sales")}}
 )
 
 , deduplicated as (
-    select category, segment
-    from ranked 
-    where rnk = 1
-    order by category, segment
+    select zipcode, city, state, region, district, country
+    from numbered 
+    where rn = 1
+    order by zipcode
 )
 
 , final as (

@@ -1,5 +1,3 @@
-{{ config(materialized="table") }}
-
 with cte as (
     select 
         ProductID productid,

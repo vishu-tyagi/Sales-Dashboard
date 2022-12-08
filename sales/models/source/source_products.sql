@@ -1,6 +1,4 @@
-{{ config(materialized="table") }}
-
-with ranked as (
+with numbered as (
     select 
         ProductID id,
         Product name,
@@ -10,19 +8,17 @@ with ranked as (
         Manufacturer manufacturer,
         `Unit Cost` unit_cost,
         `Unit Price` unit_price,
-        rank() over (
-            partition by 
-                ProductID, Product, Category, Segment, `Unit Cost`, `Unit Price`
+        row_number() over (
+            partition by ProductID, Product, Category, Segment, `Unit Cost`, `Unit Price`
             order by date desc
-        ) rnk
-    from 
-        {{source("sales", "sales")}}
+        ) rn
+    from {{source("sales", "sales")}}
 )
 
 , deduplicated as (
-    select id, name, category, segment, unit_cost, unit_price
-    from ranked
-    where rnk = 1
+    select id, name, category, segment, manufacturerid, manufacturer, unit_cost, unit_price
+    from numbered
+    where rn = 1
     order by id
 )
 
