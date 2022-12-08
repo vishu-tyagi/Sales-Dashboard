@@ -1,0 +1,69 @@
+version: 2
+
+sources:
+  - name: sales
+    description: "Raw data"
+    database: sales
+    tables:
+      - name: sales
+        description: "Fact sales"
+      - name: budget
+        description: "Fact budget"
+
+models:
+  - name: source_products
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: category
+        tests:
+          - not_null
+      - name: segment
+        tests:
+          - not_null
+  - name: source_customers
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: zipcode
+        test:
+          - not_null
+  - name: source_geography
+    columns:
+      - name: zipcode
+        tests:
+          - unique
+          - not_null
+  - name: source_date
+    columns:
+      - name: date
+        tests:
+          - unique
+          - not_null
+  - name: source_customers
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: zipcode
+        test:
+          - not_null
+  - name: source_transactions
+    columns:
+      - name: productid
+        test:
+          - not_null
+      - name: date
+        test:
+          - not_null
+      - name: customerid
+        test:
+          - not_null
+      - name: units
+        test:
+          - not_null
