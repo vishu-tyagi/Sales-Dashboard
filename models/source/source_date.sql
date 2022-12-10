@@ -6,8 +6,7 @@ with cte as (
         day(date) day,
         quarter(date) quarter,
         week(date) week,
-        dayofweek(date) day_of_week,
-        left(date, 7) yyyymm
+        dayofweek(date) day_of_week
     from {{source("sales", "sales")}}
     group by date
 )
