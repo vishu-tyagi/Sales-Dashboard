@@ -1,5 +1,6 @@
 with numbered as (
     select 
+        date(date) date,
         ProductID id,
         Product name,
         Category category,
@@ -9,17 +10,17 @@ with numbered as (
         `Unit Cost` unit_cost,
         `Unit Price` unit_price,
         row_number() over (
-            partition by ProductID, Product, Category, Segment, `Unit Cost`, `Unit Price`
+            partition by date(date), ProductID, Product, Category, Segment, `Unit Cost`, `Unit Price`
             order by date desc
         ) rn
     from {{source("sales", "sales")}}
 )
 
 , deduplicated as (
-    select id, name, category, segment, manufacturerid, manufacturer, unit_cost, unit_price
+    select date, id, name, category, segment, manufacturerid, manufacturer, unit_cost, unit_price
     from numbered
     where rn = 1
-    order by id
+    order by id, date desc
 )
 
 , final as (
