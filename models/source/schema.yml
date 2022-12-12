@@ -22,15 +22,6 @@ models:
       - name: segment
         tests:
           - not_null
-  - name: source_customers
-    columns:
-      - name: id
-        tests:
-          - unique
-          - not_null
-      - name: zipcode
-        test:
-          - not_null
   - name: source_geography
     columns:
       - name: zipcode
@@ -52,6 +43,16 @@ models:
       - name: zipcode
         test:
           - not_null
+  - name: source_manufacturers
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: name
+        test:
+          - unique
+          - not_null
   - name: source_transactions
     columns:
       - name: productid
@@ -64,5 +65,14 @@ models:
         test:
           - not_null
       - name: units
+        test:
+          - not_null
+      - name: unit_price
+        test:
+          - not_null
+      - name: unit_cost
+        test:
+          - not_null
+      - name: manufacturerid
         test:
           - not_null

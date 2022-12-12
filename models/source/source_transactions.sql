@@ -1,9 +1,12 @@
 with cte as (
     select 
-        ProductID productid,
-        date(Date) date, 
-        CustomerID customerid, 
-        Units units
+        productid
+        , date(Date) date
+        , customerid
+        , units units
+        , `Unit Cost` unit_cost
+        , `Unit Price` unit_price 
+        , manufacturerid
     from {{source("sales", "sales")}}
 )
 

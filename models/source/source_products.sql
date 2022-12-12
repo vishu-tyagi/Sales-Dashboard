@@ -1,26 +1,28 @@
 with numbered as (
     select 
-        date(date) date,
-        ProductID id,
-        Product name,
-        Category category,
-        Segment segment,
-        ManufacturerID manufacturerid,
-        Manufacturer manufacturer,
-        `Unit Cost` unit_cost,
-        `Unit Price` unit_price,
-        row_number() over (
-            partition by date(date), ProductID, Product, Category, Segment, `Unit Cost`, `Unit Price`
-            order by date desc
+        productid id
+        , product name
+        , category category
+        , segment segment
+        , row_number() over (
+            partition by  
+                productid, 
+                product,
+                category,
+                segment
         ) rn
     from {{source("sales", "sales")}}
 )
 
 , deduplicated as (
-    select date, id, name, category, segment, manufacturerid, manufacturer, unit_cost, unit_price
+    select 
+        id
+        , name
+        , category 
+        , segment
     from numbered
     where rn = 1
-    order by id, date desc
+    order by id
 )
 
 , final as (
