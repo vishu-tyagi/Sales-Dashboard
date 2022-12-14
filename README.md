@@ -6,7 +6,7 @@
 
 ##
 
-A dbt project for creating sales insights in SQL and visualizing them using Tableau.
+A dbt project for creating sales insights in SQL and visualizing results using Tableau.
 
 ## Instructions
 
