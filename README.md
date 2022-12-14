@@ -6,9 +6,24 @@
 
 ##
 
-A dbt project for creating sales insights in SQL and visualizing them using Tableau.
+A dbt project for creating sales insights in SQL and visualizing results using Tableau
 
 ## Instructions
+
+#### Move into top-level directory
+```
+cd Sales-Dashboard
+```
+
+#### Install environment
+```
+conda env create -f environment.yml
+```
+
+#### Activate environment
+```
+conda activate sales
+```
 
 #### Build models
 ```
