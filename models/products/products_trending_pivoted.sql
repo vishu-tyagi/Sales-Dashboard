@@ -28,18 +28,7 @@ with pivot_orders as (
 )
 
 , final as (
-    select
-        u.period
-        , u.id
-        , u.pivot_name
-        , u.pivot_value 
-        , p.name
-        , p.category
-        , p.segment
-    from 
-        unioned u 
-        join {{ref("source_products")}} p 
-        on u.id = p.id
+    select * from unioned
 )
 
 select * from final

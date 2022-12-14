@@ -5,4 +5,5 @@ dependencies:
   - python==3.9.13
   # Pip
   - pip==22.2.2
+  - pip:
     - dbt-mysql==1.0.0

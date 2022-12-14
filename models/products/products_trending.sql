@@ -1,6 +1,6 @@
 with trend_period as (
     select left(date, 7) month
-    from {{ref("source_date")}}
+    from {{ref("base_date")}}
     group by left(date, 7)
     order by month desc 
     limit 2
@@ -16,7 +16,7 @@ with trend_period as (
         , productid
         , sum(units) orders
         , sum(units * unit_price) revenue
-    from {{ref("source_transactions")}}
+    from {{ref("base_transactions")}}
     where left(date, 7) in (select * from trend_period)
     group by left(date, 7), productid
 )

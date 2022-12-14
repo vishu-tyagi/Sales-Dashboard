@@ -10,7 +10,7 @@ sources:
         description: "Fact budget"
 
 models:
-  - name: source_products
+  - name: base_products
     columns:
       - name: id
         tests:
@@ -22,19 +22,19 @@ models:
       - name: segment
         tests:
           - not_null
-  - name: source_geography
+  - name: base_geography
     columns:
       - name: zipcode
         tests:
           - unique
           - not_null
-  - name: source_date
+  - name: base_date
     columns:
       - name: date
         tests:
           - unique
           - not_null
-  - name: source_customers
+  - name: base_customers
     columns:
       - name: id
         tests:
@@ -43,7 +43,7 @@ models:
       - name: zipcode
         test:
           - not_null
-  - name: source_manufacturers
+  - name: base_manufacturers
     columns:
       - name: id
         tests:
@@ -53,7 +53,7 @@ models:
         test:
           - unique
           - not_null
-  - name: source_transactions
+  - name: base_transactions
     columns:
       - name: productid
         test:
