@@ -1,13 +1,13 @@
 with numbered as (
     select 
-        ZipCode zipcode,
-        City city, 
-        State state, 
-        Region region,
-        District district,
-        Country country,
+        zipcode zipcode,
+        city city, 
+        state state, 
+        region region,
+        district district,
+        country country,
         row_number() over (
-            partition by ZipCode, City, State, Region, District, Country
+            partition by zipcode, city, state, region, district, country
             order by date desc
         ) rn
     from {{source("sales", "sales")}}
